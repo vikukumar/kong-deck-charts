@@ -1,11 +1,12 @@
 # deck-kong-chart/values.yaml
 deck:
   image:
-    repository: kongdeck/deck
+    repository: kong/deck
     tag: latest
   service:
     type: LoadBalancer
     port: 8080
+  adminurl: "https://us.api.konghq.com/v2/control-planes/2406d123-0746-4b82-a9d2-e2c3c6c0d84b"
   kongKonnect:
     pat: "kpat_nnsZugrwdpa0CZ6CTxTeXZsYme0daFwYbECfxRW51ybwbZ35K"  # Replace with your actual PAT
 

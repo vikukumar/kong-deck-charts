@@ -1,5 +1,5 @@
 # deck-kong-chart/templates/kong-deck-config.yaml
-_format_version: "1.1"
+_format_version: "3.0"
 services:
   - name: {{ .Values.kong.api.name }}
     url: {{ .Values.kong.api.url }}
