@@ -1,0 +1,17 @@
+# deck-kong-chart/values.yaml
+deck:
+  image:
+    repository: kongdeck/deck
+    tag: latest
+  service:
+    type: LoadBalancer
+    port: 8080
+  kongKonnect:
+    pat: "kpat_nnsZugrwdpa0CZ6CTxTeXZsYme0daFwYbECfxRW51ybwbZ35K"  # Replace with your actual PAT
+
+kong:
+  api:
+    name: pet-inventory
+    url: https://petstore.swagger.io/v2/store
+    path: /inventory
+  
