@@ -9,7 +9,7 @@ metadata:
     configChecksum: {{ include (tpl (print .Template.BasePath "/kong-deck-config.yaml") .) . | sha256sum | trunc 63 }}
 spec:
   failedJobsHistoryLimit: 1
-  successfulJobsHistoryLimit: 3
+  successfulJobsHistoryLimit: 2
   schedule: {{ .Values.deck.sync.schedule | quote }}
   concurrencyPolicy: Forbid
   startingDeadlineSeconds: 180
