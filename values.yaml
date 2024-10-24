@@ -6,7 +6,7 @@ deck:
     tag: latest
   konnectAddress: "https://us.api.konghq.com"
   kongKonnect:
-    pat: "kpat_nnsZugrwdpa0CZ6CTxTeXZsYme0daFwYbECfxRW51ybwbZ35K"  # Replace with your actual PAT
+    pat: ""  # Replace with your actual PAT
   sync:
     enabled: true
     schedule: "* * * * *"
