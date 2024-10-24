@@ -12,7 +12,7 @@ deck:
     schedule: "* * * * *"
 
 controlPlane:
-  name: 2406d123-0746-4b82-a9d2-e2c3c6c0d84b
+  name: test
   config: # Here Deck Kong Yaml 
     services:
     - connect_timeout: 60000
