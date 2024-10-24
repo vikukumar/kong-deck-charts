@@ -12,7 +12,7 @@ deck:
     schedule: "* * * * *"
 
 controlPlane:
-  name: test
+  name: 2406d123-0746-4b82-a9d2-e2c3c6c0d84b
   config: # Here Deck Kong Yaml 
     services:
     - connect_timeout: 60000
@@ -27,26 +27,6 @@ controlPlane:
       - name: inventory
         paths:
         - /v2/store/inventory
-        preserve_host: false
-        protocols:
-        - http
-        - https
-        regex_priority: 0
-        strip_path: true
-        https_redirect_status_code: 426
-    services:
-    - connect_timeout: 60000
-      host: petstore.swagger.io
-      name: petinventory1
-      port: 80
-      protocol: https
-      read_timeout: 60000
-      retries: 5
-      write_timeout: 60000
-      routes:
-      - name: inventory1
-        paths:
-        - /v2/store/inventory1
         preserve_host: false
         protocols:
         - http
