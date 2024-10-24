@@ -58,7 +58,7 @@ controlPlane:
         https_redirect_status_code: 426
     # Global Plugins are defined here
     plugins:
-    - name: key-auth-global
+    - name: key-auth
       enabled: true
       config:
         key_names:
