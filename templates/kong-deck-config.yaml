@@ -1,9 +1,13 @@
 # deck-kong-chart/templates/kong-deck-config.yaml
-_format_version: "3.0"
-services:
-  - name: {{ .Values.kong.api.name }}
-    url: {{ .Values.kong.api.url }}
-    routes:
-      - name: {{ .Values.kong.api.name }}-route
-        paths:
-          - {{ .Values.kong.api.path }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deck-config
+  namespace: {{ .Values.deck.namespace }}
+data:
+  kong.yaml: |
+    _format_version: "3.0"
+    _konnect:
+       control_plane_name: {{ .Values.controlPlane.name }}
+    
+    {{- .Values.controlPlane.config | toYaml | nindent 5 }}

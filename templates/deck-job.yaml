@@ -1,0 +1,59 @@
+# deck-kong-chart/templates/deck-job.yaml
+{{- if .Values.deck.sync.enabled }}
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: konnect-sync
+  annotations:
+    configChecksum: {{ include (tpl (print .Template.BasePath "/kong-deck-config.yaml") .) . | sha256sum | trunc 63 }}
+spec:
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  schedule: {{ .Values.deck.sync.schedule | quote }}
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 180
+  jobTemplate:
+    spec:
+      backoffLimit: 3
+      template:
+        metadata:
+          annotations:
+            valuesChecksum: {{ .Values | toYaml | sha256sum | trunc 63 }}
+        spec:
+          restartPolicy: OnFailure
+          shareProcessNamespace: true
+          containers:
+            - name: deck
+              image: {{ .Values.deck.image.repository }}:{{ .Values.deck.image.tag }}
+              imagePullPolicy: Always
+              command:
+                - /bin/sh
+                - -c
+              args:
+                - |
+                  echo 'Pinging Konnect to validate connection'
+                  deck gateway ping --konnect-addr '{{ .Values.deck.konnectAddress }}' --konnect-token $KONNECT_PAT_TOKEN
+
+                  echo 'Checking differences & validating configuration'
+                  deck gateway diff kong.yaml --konnect-addr '{{ .Values.deck.konnectAddress }}' --konnect-token $KONNECT_PAT_TOKEN
+
+                  echo 'Synchronizing changes with Konnect'
+                  deck gateway sync kong.yaml --konnect-addr '{{ .Values.deck.konnectAddress }}' --konnect-token $KONNECT_PAT_TOKEN
+              env:
+              - name: KONNECT_PAT_TOKEN
+                value: {{ .Values.deck.kongKonnect.pat | quote }}
+
+              volumeMounts:
+                - name: deck-config-volume
+                  mountPath: /kong.yaml
+                  subPath: kong.yaml
+
+              securityContext:
+                runAsUser: 1654
+
+          volumes:
+            - name: deck-config-volume
+              configMap:
+                name: deck-config
+                defaultMode: 0777

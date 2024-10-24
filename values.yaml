@@ -1,18 +1,33 @@
 # deck-kong-chart/values.yaml
 deck:
+  namespace: deck-am
   image:
     repository: kong/deck
     tag: latest
-  service:
-    type: LoadBalancer
-    port: 8080
-  adminurl: "https://us.api.konghq.com/v2/control-planes/2406d123-0746-4b82-a9d2-e2c3c6c0d84b"
+  konnectAddress: "https://us.api.konghq.com"
   kongKonnect:
     pat: "kpat_nnsZugrwdpa0CZ6CTxTeXZsYme0daFwYbECfxRW51ybwbZ35K"  # Replace with your actual PAT
 
-kong:
-  api:
-    name: pet-inventory
-    url: https://petstore.swagger.io/v2/store
-    path: /inventory
-  
+controlPlane:
+  name: test
+  config:
+    services:
+    - connect_timeout: 60000
+      host: example.com
+      name: foo
+      port: 80
+      protocol: http
+      read_timeout: 60000
+      retries: 5
+      write_timeout: 60000
+      routes:
+      - name: bar
+        paths:
+        - /bar
+        preserve_host: false
+        protocols:
+        - http
+        - https
+        regex_priority: 0
+        strip_path: true
+        https_redirect_status_code: 426
