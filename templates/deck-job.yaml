@@ -57,3 +57,4 @@ spec:
               configMap:
                 name: deck-config
                 defaultMode: 0777
+{{ end }}
