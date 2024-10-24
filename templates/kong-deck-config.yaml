@@ -10,4 +10,4 @@ data:
     _konnect:
        control_plane_name: {{ .Values.controlPlane.name }}
     
-    {{- .Values.controlPlane.config | toYaml | nindent 5 }}
+    {{- .Values.controlPlane.config | toYaml | nindent 4 }}
