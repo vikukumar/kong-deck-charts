@@ -16,17 +16,17 @@ controlPlane:
   config: # Here Deck Kong Yaml 
     services:
     - connect_timeout: 60000
-      host: https://petstore.swagger.io/v2/store/inventory
+      host: petstore.swagger.io
       name: petinventory
       port: 80
-      protocol: http
+      protocol: https
       read_timeout: 60000
       retries: 5
       write_timeout: 60000
       routes:
       - name: inventory
         paths:
-        - /inventory
+        - /v2/store/inventory
         preserve_host: false
         protocols:
         - http
