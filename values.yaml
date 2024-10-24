@@ -14,6 +14,7 @@ deck:
 controlPlane:
   name: test
   config: # Here Deck Kong Yaml 
+    # Services Should be Add here
     services:
     - connect_timeout: 60000
       host: petstore.swagger.io
@@ -31,6 +32,7 @@ controlPlane:
         protocols:
         - http
         - https
+        plugins: []
         regex_priority: 0
         strip_path: true
         https_redirect_status_code: 426
@@ -50,6 +52,19 @@ controlPlane:
         protocols:
         - http
         - https
+        plugins: []
         regex_priority: 0
         strip_path: true
         https_redirect_status_code: 426
+    # Global Plugins are defined here
+    plugins:
+    - name: key-auth-global
+      enabled: true
+      config:
+        key_names:
+        - apikey
+    # Consumer Will be Create Using below config
+    consumers:
+    - username: alex
+      keyauth_credentials:
+      - key: hello_world
