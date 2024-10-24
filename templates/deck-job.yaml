@@ -33,7 +33,7 @@ spec:
               args:
                 - |
                   echo 'Pinging Konnect to validate connection'
-                  deck gateway ping --konnect-addr '{{ .Values.deck.konnectAddress }}' --konnect-token $KONNECT_PAT_TOKEN
+                  deck gateway ping --konnect-addr '{{ .Values.deck.konnectAddress }}' --konnect-token $KONNECT_PAT_TOKEN --konnect-control-plane-name '{{ .Values.controlPlane.name }}'
 
                   echo 'Checking differences & validating configuration'
                   deck gateway diff kong.yaml --konnect-addr '{{ .Values.deck.konnectAddress }}' --konnect-token $KONNECT_PAT_TOKEN
