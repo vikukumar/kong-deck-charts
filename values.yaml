@@ -37,14 +37,14 @@ controlPlane:
     services:
     - connect_timeout: 60000
       host: petstore.swagger.io
-      name: petinventory
+      name: petinventory1
       port: 80
       protocol: https
       read_timeout: 60000
       retries: 5
       write_timeout: 60000
       routes:
-      - name: inventory
+      - name: inventory1
         paths:
         - /v2/store/inventory1
         preserve_host: false
