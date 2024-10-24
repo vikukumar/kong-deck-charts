@@ -13,7 +13,7 @@ deck:
 
 controlPlane:
   name: test
-  config:
+  config: # Here Deck Kong Yaml 
     services:
     - connect_timeout: 60000
       host: example.com
